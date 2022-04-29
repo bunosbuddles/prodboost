@@ -135,3 +135,7 @@ This app will be used mainly amongst friends, as it would be weird for the users
 ### Sprint 1
 
 <img src=Walkthrough1.gif width='' />
+
+### Sprint 3
+
+
