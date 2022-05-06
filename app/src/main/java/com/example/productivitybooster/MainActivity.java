@@ -1,6 +1,9 @@
 package com.example.productivitybooster;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,11 +11,15 @@ import android.os.Bundle;
 import org.apache.commons.io.FileUtils;
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.productivitybooster.fragments.ComposeFragment;
+import com.example.productivitybooster.fragments.PostsFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -28,111 +35,45 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
-    List<String> items;
 
-    private RecyclerView todoList;
-    private Button btnPost;
-    private EditText etItem;
-    private Button btnAdd;
-    ItemsAdapter itemsAdapter;
+    final FragmentManager fragmentManager = getSupportFragmentManager();
+    private BottomNavigationView bottomNavigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        todoList = findViewById(R.id.todoList);
-        btnPost = findViewById(R.id.btnPost);
-        btnAdd = findViewById(R.id.btnAdd);
-        etItem = findViewById(R.id.addTaskField);
 
-        loadItems();
-
-        btnPost.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener()
+        {
             @Override
-            public void onClick(View v) {
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(items, currentUser);
-            }
-        });
-
-        ItemsAdapter.OnLongClickListener onLongClickListener = new ItemsAdapter.OnLongClickListener() {
-            @Override
-            public void onItemLongClicked(int position) {
-                items.remove(position);
-                itemsAdapter.notifyItemRemoved(position);
-                saveItems();
-            }
-        };
-
-        itemsAdapter = new ItemsAdapter(items, onLongClickListener);
-        todoList.setAdapter(itemsAdapter);
-        todoList.setLayoutManager(new LinearLayoutManager(this));
-
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String todoItem = etItem.getText().toString();
-                items.add(todoItem);
-                itemsAdapter.notifyItemInserted(items.size() - 1);
-                etItem.setText("");
-                saveItems();
-            }
-        });
-    }
-
-    private void savePost(List <String> items, ParseUser currentUser) {
-        Post post = new Post();
-        post.setUser(currentUser);
-        post.setList(items);
-        post.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Error while saving", e);
-                    Toast.makeText(MainActivity.this, "Error while saving!", Toast.LENGTH_SHORT).show();
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
+            {
+                Fragment fragment;
+                switch (menuItem.getItemId())
+                {
+                    case R.id.action_home:
+                        fragment = new PostsFragment();
+                        break;
+                    case R.id.action_compose:
+                        fragment = new ComposeFragment();
+                        break;
+                    case R.id.action_profile:
+                        fragment = new ComposeFragment();
+                        break;
+                    default:
+                        fragment = new ComposeFragment();
+                        break;
                 }
-                Log.i(TAG, "Post save was successful!!");
-                Toast.makeText(MainActivity.this, "Post save successful!", Toast.LENGTH_SHORT).show();
+                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+                return true;
             }
         });
+        bottomNavigationView.setSelectedItemId(R.id.action_home);
     }
 
-    private File getDataFile(){
-        return new File(getFilesDir(), "data.txt");
-    }
 
-    private void loadItems(){
-        try {
-            items = new ArrayList<>(FileUtils.readLines(getDataFile(), Charset.defaultCharset()));
-        } catch (IOException e) {
-            Log.e("MainActivity", "Error reading items", e);
-            items = new ArrayList<>();
-        }
-    }
-
-    private void saveItems(){
-        try {
-            FileUtils.writeLines(getDataFile(), items);
-        } catch (IOException e) {
-            Log.e("MainActivity", "Error writing items", e);
-        }
-    }
-
-    private void queryPosts(){
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USER);
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> posts, ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Issue with getting posts", e);
-                    return;
-                }
-                for(Post post : posts){
-                    Log.i(TAG, "Post: " + post.getUser());
-                }
-            }
-        });
-    }
 }

@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.31296296296296294" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.47962962962962963" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.47314814814814815" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_compose.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/fragment_posts.xml" value="0.3609375" />
+        <entry key="app/src/main/res/layout/item_post.xml" value="0.3609375" />
+        <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.5635416666666667" />
       </map>
     </option>
   </component>
