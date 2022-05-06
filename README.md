@@ -37,7 +37,7 @@ This app will be used mainly amongst friends, as it would be weird for the users
 - [X] User can register a new account
 - [X] User can enter in data that will be linked to their account
 - [X] User can login
-- [ ] User can publish their own todo list onto a feed
+- [X] User can publish their own todo list onto a feed
 - [ ] User can edit their todo list
 - [ ] User can view a feed of others' todo list
 - [ ] User can notify others for their todo list
@@ -138,4 +138,5 @@ This app will be used mainly amongst friends, as it would be weird for the users
 
 ### Sprint 3
 
+<img src=Walkthrough3.gif width='' />
 
