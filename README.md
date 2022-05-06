@@ -38,15 +38,15 @@ This app will be used mainly amongst friends, as it would be weird for the users
 - [X] User can enter in data that will be linked to their account
 - [X] User can login
 - [X] User can publish their own todo list onto a feed
-- [ ] User can edit their todo list
-- [ ] User can view a feed of others' todo list
-- [ ] User can notify others for their todo list
-- [ ] User can view their profiles and a log of all of their completed/incompleted tasks from the past
+- [X] User can view a feed of others' todo list
 
 **Optional Nice-to-have Stories**
 
 - [ ] Users who have completed all of their tasks in consecutive days will have streaks marked for their profile
 - [ ] User can comment on other's todo lists
+- [ ] User can edit their todo list
+- [ ] User can notify others for their todo list
+- [ ] User can view their profiles and a log of all of their completed/incompleted tasks from the past
 
 ### 2. Screen Archetypes
 
@@ -139,4 +139,8 @@ This app will be used mainly amongst friends, as it would be weird for the users
 ### Sprint 3
 
 <img src=Walkthrough3.gif width='' />
+
+### Sprint 4
+
+<img src=Walkthrough4.gif width='' />
 
