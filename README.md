@@ -89,7 +89,6 @@ This app will be used mainly amongst friends, as it would be weird for the users
 
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
 <img src=Wireframe.gif width='' />
 
 
