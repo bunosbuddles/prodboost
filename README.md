@@ -92,9 +92,6 @@ This app will be used mainly amongst friends, as it would be weird for the users
 [Add picture of your hand sketched wireframes in this section]
 <img src=Wireframe.gif width='' />
 
-### [BONUS] Digital Wireframes & Mockups
-
-### [BONUS] Interactive Prototype
 
 ## Schema 
 
